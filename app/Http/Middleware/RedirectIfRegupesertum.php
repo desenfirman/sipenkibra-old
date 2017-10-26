@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Support\Facades\Auth;
+
+class RedirectIfRegupesertum
+{
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Closure  $next
+	 * @param  string|null  $guard
+	 * @return mixed
+	 */
+	public function handle($request, Closure $next, $guard = 'regupesertum')
+	{
+	    if (Auth::guard($guard)->check()) {
+	        return redirect('regupesertum/home');
+	    }
+
+	    return $next($request);
+	}
+}
